@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Porcela — Desenvolvedor Web | A Biblioteca de Projetos</title>
+  <meta name="description" content="Portfólio de Gabriel Porcela, desenvolvedor web. Explore projetos, habilidades e trajetória em uma biblioteca digital interativa." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gabriel Porcela — Desenvolvedor Web" />
+  <meta property="og:description" content="Uma biblioteca digital onde cada projeto é um livro. Explore o portfólio de Gabriel Porcela." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/og-cover.svg" />
+
+  <!-- Favicon (preparado — substitua pelo ícone final em assets/icons/) -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="portfolio/css/style.css" />
+  <link rel="stylesheet" href="portfolio/css/style.css" />
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#hero" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true">📖</span>
+        <span class="nav__brand-text">Gabriel Porcela</span>
+      </a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="navMenu">
+        <li><a href="#biblioteca">Projetos</a></li>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#curriculo">Currículo</a></li>
+        <li><a href="#contato" class="nav__cta">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ================= 1. HERO ================= -->
+    <section id="hero" class="hero">
+      <div class="hero__atmosphere" aria-hidden="true">
+        <div class="hero__dust"></div>
+        <div class="hero__glow"></div>
+      </div>
+
+      <div class="hero__inner">
+        <p class="hero__eyebrow">Bem-vindo(a) à biblioteca de</p>
+        <h1 class="hero__title">
+          Gabriel <span class="hero__title-accent">Porcela</span>
+        </h1>
+        <p class="hero__role">Desenvolvedor Web</p>
+        <p class="hero__lede">
+          Organizo meus projetos como uma estante de livros, cada projeto tem seu espaço e conta um pouco da minha evolução como desenvolvedor. São trabalhos que nasceram de ideias e problemas reais e que me ajudaram a aprender, testar novas tecnologias e transformar essas ideias em experiências digitais.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#biblioteca" class="btn btn-main">Explorar projetos</a>
+          <a href="#sobre" class="btn btn-main">Sobre mim</a>
+        </div>
+      </div>
+
+      <div class="hero__shelf" aria-hidden="true">
+        <div class="hero__shelf-books">
+          <span class="mini-book" style="--h:64%;--c:#0F172A"></span>
+          <span class="mini-book" style="--h:78%;--c:#1E3A5F"></span>
+          <span class="mini-book" style="--h:58%;--c:#2563EB"></span>
+          <span class="mini-book" style="--h:85%;--c:#334155"></span>
+          <span class="mini-book" style="--h:70%;--c:#3B82F6"></span>
+          <span class="mini-book" style="--h:60%;--c:#1D4ED8"></span>
+          <span class="mini-book" style="--h:75%;--c:#475569"></span>
+        </div>
+        <div class="hero__shelf-plank"></div>
+      </div>
+
+      <a class="hero__scroll-hint" href="#biblioteca" aria-hidden="true">
+        <span>Role para explorar</span>
+        <svg width="14" height="22" viewBox="0 0 14 22" fill="none"><path d="M1 1L7 21L13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- ================= 2. BIBLIOTECA DE PROJETOS ================= -->
+    <section id="biblioteca" class="library">
+      <div class="section-heading">
+        <p class="section-heading__eyebrow">Acervo</p>
+        <h2 class="section-heading__title">A biblioteca de projetos</h2>
+        <p class="section-heading__lede">
+          Cada lombada abaixo representa um projeto real. Passe o mouse para
+          ver do que se trata, clique para abrir o livro por completo.
+        </p>
+      </div>
+
+      <div class="bookshelf" id="bookshelf" role="list">
+        <!-- Livros gerados dinamicamente por main.js a partir de js/projects.js -->
+      </div>
+    </section>
+
+    <!-- ============ MODAL — DETALHES DO PROJETO ============ -->
+    <div class="book-modal" id="bookModal" aria-hidden="true">
+      <div class="book-modal__backdrop" data-close-modal></div>
+      <div class="book-modal__frame" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="book-modal__close" data-close-modal aria-label="Fechar detalhes do projeto">&times;</button>
+
+        <article class="open-book" id="openBook">
+          <!-- Página esquerda -->
+          <div class="open-book__page open-book__page--left">
+            <p class="open-book__category" id="modalCategory"></p>
+            <h3 class="open-book__title" id="modalTitle"></h3>
+            <p class="open-book__status" id="modalStatus"></p>
+
+            <div class="open-book__block">
+              <h4>Problema</h4>
+              <p id="modalProblem"></p>
+            </div>
+            <div class="open-book__block">
+              <h4>Solução</h4>
+              <p id="modalSolution"></p>
+            </div>
+          </div>
+
+          <!-- Página direita -->
+          <div class="open-book__page open-book__page--right">
+            <div class="open-book__block">
+              <h4>Tecnologias</h4>
+              <ul class="tech-tags" id="modalTech"></ul>
+            </div>
+
+            <div class="open-book__block">
+              <h4>Principais funcionalidades</h4>
+              <ul class="feature-list" id="modalFeatures"></ul>
+            </div>
+
+            <div class="open-book__links">
+              <a id="modalDemo" href="#" target="_blank" rel="noopener" class="btn btn--primary btn-main">Ver demonstração</a>
+              <a id="modalGithub" href="#" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">Ver no GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ================= 4. SOBRE MIM ================= -->
+   <section id="sobre" class="about">
+  <div class="about__book">
+
+<div class="about__page about__page--left">
+  <p class="section-heading__eyebrow">Capítulo pessoal</p>
+  <h2 class="section-heading__title">Sobre mim</h2>
+
+  <p class="about__text">
+    Ao conhecer o curso de Python do canal Curso em Vídeo, descobri na programação uma nova paixão. A partir disso, passei a estudar desenvolvimento web e a criar meus próprios projetos, buscando transformar o conhecimento adquirido em aplicações práticas.
+  </p>
+
+  <p class="about__text">
+    Sou estudante de Análise e Desenvolvimento de Sistemas e desenvolvedor web em formação, com foco em desenvolvimento Front-End. Tenho uma boa base em HTML, CSS e JavaScript e venho desenvolvendo projetos próprios para transformar meus conhecimentos em soluções práticas.
+  </p>
+
+  <p class="about__text">
+    Ao longo dos meus estudos, também tive contato com Python, Flask, bancos de dados, APIs e integrações com serviços externos. Entre os projetos que desenvolvi estão sites institucionais, landing pages, uma loja virtual e um sistema de atendimento e agendamento para barbearia integrado ao WhatsApp.
+  </p>
+
+  <p class="about__text">
+    Meu objetivo é conquistar minha primeira oportunidade profissional na área de tecnologia. Tenho me dedicado aos estudos, buscado aprimorar meus conhecimentos e desenvolvido projetos para me preparar para esse momento. Quero transformar essa dedicação em uma oportunidade de trabalhar com algo que realmente gosto, continuar aprendendo e crescer profissionalmente na área.
+  </p>
+</div>
+
+<div class="about__page about__page--right">
+  <h4>Objetivos profissionais</h4>
+
+  <ul class="feature-list">
+    <li>Conquistar minha primeira oportunidade como desenvolvedor Front-End Júnior ou estagiário.</li>
+    <li>Aprofundar meus conhecimentos em React, APIs e desenvolvimento de aplicações web.</li>
+    <li>Participar de projetos reais e evoluir continuamente como desenvolvedor.</li>
+  </ul>
+
+  <h4>Características profissionais</h4>
+
+<ul class="feature-list">
+  <li>Organização e atenção aos detalhes</li>
+  <li>Facilidade para aprender e buscar novos conhecimentos</li>
+  <li>Persistência na resolução de problemas</li>
+  <li>Compromisso com código organizado e projetos bem estruturados</li>
+  <li>Disposição para receber feedback e evoluir</li>
+  <li>Interesse em transformar aprendizado em soluções práticas</li>
+</ul>
+
+<h4>Características de personalidade</h4>
+
+<ul class="feature-list">
+  <li>Organização e responsabilidade</li>
+  <li>Abertura para receber feedback e aprender com ele</li>
+  <li>Facilidade para trabalhar em equipe</li>
+  <li>Facilidade para aprender e absorver novos conhecimentos</li>
+  <li>Boa comunicação e disposição para colaborar</li>
+  <li>Interesse constante por leitura e aprendizado</li>
+</ul>
+
+<h4>Ideia</h4>
+
+<p class="about__text">
+  A ideia deste portfólio nasceu da relação que vejo entre leitura e aprendizado. Assim como um livro reúne conhecimentos e experiências, cada projeto desta biblioteca representa algo que aprendi, pratiquei e transformei em uma solução.
+</p>
+
+
+</div>
+</div>
+</section>
+
+
+    <!-- ================= 5. HABILIDADES ================= -->
+    <section id="habilidades" class="skills">
+      <div class="section-heading">
+        <p class="section-heading__eyebrow">Estante técnica</p>
+        <h2 class="section-heading__title">Habilidades</h2>
+        <p class="section-heading__lede">
+          As tecnologias que uso no dia a dia, organizadas como uma pequena
+          estante técnica.
+        </p>
+      </div>
+
+      <ul class="skill-shelf" id="skillShelf">
+        <!-- Gerado dinamicamente por main.js -->
+      </ul>
+    </section>
+
+    <!-- ================= 6. CURRÍCULO ================= -->
+
+<section id="curriculo" class="resume">
+  <div class="section-heading">
+    <p class="section-heading__eyebrow">Meu livro profissional</p>
+    <h2 class="section-heading__title">Currículo</h2>
+    <p class="section-heading__lede">
+      Uma visão rápida da minha trajetória e dos principais conhecimentos
+      que venho desenvolvendo na área de tecnologia.
+    </p>
+  </div>
+
+  <div class="resume__book">
+
+<div class="resume__column">
+  <h4>Formação</h4>
+
+  <p class="resume__item">
+    <strong>Análise e Desenvolvimento de Sistemas</strong><br />
+    Em andamento
+  </p>
+
+  <h4>Conhecimentos</h4>
+
+  <p class="resume__item">
+    HTML5, CSS3, JavaScript, Python, Flask, Git e GitHub e APIs.
+  </p>
+
+</div>
+
+<div class="resume__column">
+  <h4>Experiência</h4>
+
+  <p class="resume__item">
+    <strong>Auxiliar de Logística</strong><br />
+    Ferramentas Gerais · 03/2025 – atual
+  </p>
+
+  <h4>Projetos</h4>
+
+  <p class="resume__item">
+    <strong>New Life Style</strong> — E-commerce
+  </p>
+
+  <p class="resume__item">
+    <strong>Agente de IA para Barbearia</strong> — Atendimento e agendamento via WhatsApp
+  </p>
+</div>
+
+  </div>
+
+  <div class="resume__download">
+    <a
+      href="portfolio/assets/documents/curriculo.pdf"
+      download
+      class="btn btn-main"
+      id="resumeDownload"
+    >
+      Baixar currículo
+    </a>
+
+<p class="resume__download-hint">
+  Currículo completo disponível em PDF.
+</p>
+
+
+  </div>
+</section>
+
+
+    <!-- ================= 7. CONTATO ================= -->
+    <section id="contato" class="contact">
+      <div class="contact__desk">
+        <div class="contact__info">
+          <p class="section-heading__eyebrow">Mesa de leitura</p>
+          <h2 class="section-heading__title">Vamos conversar</h2>
+          <p class="section-heading__lede">
+            Tem um projeto em mente ou quer trocar uma ideia? Fale comigo por
+            um dos canais abaixo ou envie uma mensagem pelo formulário.
+          </p>
+
+          <ul class="contact__channels">
+            <li>
+              <span class="contact__icon" aria-hidden="true">✉</span>
+              <a href="mailto:seuemail@exemplo.com">gabrielporcela96@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact__icon" aria-hidden="true">in</span>
+              <a href="https://www.linkedin.com/in/gabrielporcela/" target="_blank" rel="noopener">LinkedIn</a>
+            </li>
+            <li>
+              <span class="contact__icon" aria-hidden="true">&lt;/&gt;</span>
+              <a href="https://github.com/GabrielPorcela" target="_blank" rel="noopener">GitHub</a>
+            </li>
+            <li>
+              <span class="contact__icon" aria-hidden="true">☎</span>
+              <a href="https://wa.me/5551993373155" target="_blank" rel="noopener">WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contact__form" id="contactForm" novalidate>
+          <!--
+            Formulário front-end. Estrutura preparada para integração
+            futura (ex. EmailJS, endpoint próprio ou API de terceiros).
+          -->
+          <div class="form-field">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-field">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-main">Enviar mensagem</button>
+          <p class="contact__form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Desenvolvedor Web. Foco em experiências digitais.</p>
+  </footer>
+
+  <script src="portfolio/js/animations.js"></script>
+  <script src="portfolio/js/projects.js"></script>
+  <script src="portfolio/js/main.js"></script>
+</body>
+</html>

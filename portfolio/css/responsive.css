@@ -1,0 +1,124 @@
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* ---------- Tablet (<= 900px) ---------- */
+@media (max-width: 900px) {
+  .about__book,
+  .resume__book,
+  .contact__desk {
+    grid-template-columns: 1fr;
+  }
+
+  .about__page--left,
+  .open-book__page--left {
+    border-right: none;
+    border-bottom: 1px dashed rgba(20, 16, 11, 0.18);
+  }
+
+  .open-book {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__desk {
+    padding: var(--space-5);
+  }
+}
+
+/* ---------- Mobile nav (<= 780px) ---------- */
+@media (max-width: 780px) {
+  .nav__toggle {
+    display: flex;
+  }
+
+  .nav__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(78vw, 320px);
+    background: var(--wood-900);
+    border-left: 1px solid var(--border-subtle);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--space-5);
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .nav__menu.is-open {
+    transform: translateX(0);
+  }
+
+  .nav__cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav__toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav__toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* ---------- Small screens (<= 600px) ---------- */
+@media (max-width: 600px) {
+  section {
+    padding: var(--space-6) var(--space-3);
+  }
+
+  /* Biblioteca: em vez de encolher os livros até ficarem ilegíveis,
+     transforma a estante em um carrossel horizontal com livros de
+     tamanho legível — mantém a metáfora sem espremer o conteúdo. */
+  .bookshelf {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3) var(--space-3);
+  }
+
+  .bookshelf::after {
+    left: var(--space-3);
+    right: var(--space-3);
+  }
+
+  .book {
+    min-width: 62vw;
+    scroll-snap-align: start;
+    height: 260px;
+  }
+
+  .book__hover-panel {
+    display: none;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .open-book__page,
+  .about__page {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .book-modal__frame {
+    max-height: 92vh;
+  }
+
+  .skill-shelf {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
