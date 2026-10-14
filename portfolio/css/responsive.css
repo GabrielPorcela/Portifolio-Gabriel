@@ -2,6 +2,11 @@
    RESPONSIVE
    ========================================================================== */
 
+/* ---------- Global — previne overflow horizontal ---------- */
+body {
+  overflow-x: hidden;
+}
+
 /* ---------- Tablet (<= 900px) ---------- */
 @media (max-width: 900px) {
   .about__book,
@@ -13,7 +18,7 @@
   .about__page--left,
   .open-book__page--left {
     border-right: none;
-    border-bottom: 1px dashed rgba(20, 16, 11, 0.18);
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.2);
   }
 
   .open-book {
@@ -46,15 +51,26 @@
     padding: var(--space-6) var(--space-5);
     transform: translateX(100%);
     transition: transform 0.35s var(--ease-out);
+    z-index: 101;
   }
 
   .nav__menu.is-open {
     transform: translateX(0);
   }
 
+  /* Touch targets mínimos de 44px para acessibilidade */
+  .nav__menu a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+    width: 100%;
+  }
+
   .nav__cta {
     width: 100%;
     text-align: center;
+    justify-content: center;
   }
 
   .nav__toggle[aria-expanded="true"] span:nth-child(1) {
@@ -109,13 +125,57 @@
     width: 100%;
   }
 
+  /* Reduz fonte da lede para caber em telas pequenas */
+  .hero__lede {
+    font-size: 0.95rem;
+  }
+
   .open-book__page,
   .about__page {
     padding: var(--space-5) var(--space-3);
   }
 
+  /* Modal com menor padding lateral para aproveitar o espaço */
+  .book-modal {
+    padding: var(--space-2);
+  }
+
   .book-modal__frame {
-    max-height: 92vh;
+    max-height: 94vh;
+  }
+
+  /* Botão fechar modal com alvo de toque adequado */
+  .book-modal__close {
+    width: 44px;
+    height: 44px;
+    font-size: 1.6rem;
+  }
+
+  /* Links do modal em coluna para não apertar em mobile */
+  .open-book__links {
+    flex-direction: column;
+  }
+
+  .open-book__links .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Currículo com padding reduzido */
+  .resume__book {
+    padding: var(--space-4);
+  }
+
+  /* Botão de envio do formulário ocupa largura total */
+  .contact__form .btn[type="submit"] {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Scroll suave em iOS para a estante de livros */
+  .bookshelf {
+    -webkit-overflow-scrolling: touch;
   }
 
   .skill-shelf {
