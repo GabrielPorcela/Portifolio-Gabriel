@@ -7,12 +7,28 @@ body {
   overflow-x: hidden;
 }
 
+/* ---------- Notebooks / tablets na horizontal (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  /* Menu desktop com folga entre 781px e 1024px */
+  .nav__menu {
+    gap: var(--space-4);
+  }
+}
+
 /* ---------- Tablet (<= 900px) ---------- */
 @media (max-width: 900px) {
   .about__book,
   .resume__book,
   .contact__desk {
     grid-template-columns: 1fr;
+  }
+
+  /* Impede que conteúdo longo force a coluna além da tela */
+  .about__book > *,
+  .resume__book > *,
+  .contact__desk > *,
+  .open-book > * {
+    min-width: 0;
   }
 
   .about__page--left,
@@ -26,7 +42,20 @@ body {
   }
 
   .contact__desk {
+    gap: var(--space-5);
     padding: var(--space-5);
+  }
+
+  /* Modal em coluna única fica longo: o botão fechar acompanha a rolagem */
+  .book-modal__close {
+    position: sticky;
+    top: var(--space-2);
+    display: block;
+    margin: var(--space-2) var(--space-2) calc(-36px - var(--space-2)) auto;
+  }
+
+  .open-book__category {
+    padding-right: 3rem;
   }
 }
 
@@ -34,6 +63,9 @@ body {
 @media (max-width: 780px) {
   .nav__toggle {
     display: flex;
+    /* Fica acima do painel para poder fechar o menu */
+    position: relative;
+    z-index: 102;
   }
 
   .nav__menu {
@@ -41,7 +73,9 @@ body {
     top: 0;
     right: 0;
     height: 100vh;
+    height: 100dvh;
     width: min(78vw, 320px);
+    overflow-y: auto;
     background: var(--wood-900);
     border-left: 1px solid var(--border-subtle);
     flex-direction: column;
@@ -50,12 +84,19 @@ body {
     gap: var(--space-4);
     padding: var(--space-6) var(--space-5);
     transform: translateX(100%);
-    transition: transform 0.35s var(--ease-out);
+    visibility: hidden;
+    transition: transform 0.35s var(--ease-out), visibility 0s linear 0.35s;
     z-index: 101;
   }
 
   .nav__menu.is-open {
     transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav__menu li {
+    width: 100%;
   }
 
   /* Touch targets mínimos de 44px para acessibilidade */
@@ -84,36 +125,38 @@ body {
   }
 }
 
+/* ---------- Painel de hover dos livros: só com mouse e espaço ---------- */
+@media (max-width: 600px), (hover: none) {
+  .book__hover-panel {
+    display: none;
+  }
+}
+
 /* ---------- Small screens (<= 600px) ---------- */
 @media (max-width: 600px) {
   section {
     padding: var(--space-6) var(--space-3);
   }
 
-  /* Biblioteca: em vez de encolher os livros até ficarem ilegíveis,
-     transforma a estante em um carrossel horizontal com livros de
-     tamanho legível — mantém a metáfora sem espremer o conteúdo. */
-  .bookshelf {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-3) var(--space-3);
+  .section-heading {
+    margin-bottom: var(--space-5);
   }
 
-  .bookshelf::after {
-    left: var(--space-3);
-    right: var(--space-3);
+  .site-header {
+    padding: var(--space-2) var(--space-3);
   }
 
-  .book {
-    min-width: 62vw;
-    scroll-snap-align: start;
-    height: 260px;
+  /* Hero: espaço extra embaixo para a dica de rolagem não encostar na estante */
+  .hero {
+    padding-bottom: var(--space-7);
   }
 
-  .book__hover-panel {
-    display: none;
+  .hero__inner {
+    padding: 0;
+  }
+
+  .hero__shelf {
+    margin-top: var(--space-6);
   }
 
   .hero__actions {
@@ -130,6 +173,35 @@ body {
     font-size: 0.95rem;
   }
 
+  /* Biblioteca: em vez de encolher os livros até ficarem ilegíveis,
+     transforma a estante em um carrossel horizontal com livros de
+     tamanho legível — mantém a metáfora sem espremer o conteúdo.
+     A prateleira vira uma camada de fundo para não "rolar junto"
+     com os livros dentro do carrossel. */
+  .bookshelf {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--space-3);
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3) calc(var(--space-3) + 14px);
+    background:
+      linear-gradient(180deg, #2e2e2e, #111111) no-repeat
+        left var(--space-3) bottom var(--space-3) / calc(100% - 2 * var(--space-3)) 14px,
+      linear-gradient(180deg, rgba(100, 82, 82, 0.16), rgba(120, 120, 120, 0.06));
+  }
+
+  .bookshelf::after {
+    display: none;
+  }
+
+  .book {
+    flex: 0 0 min(62vw, 240px);
+    scroll-snap-align: start;
+    height: 260px;
+  }
+
   .open-book__page,
   .about__page {
     padding: var(--space-5) var(--space-3);
@@ -142,6 +214,7 @@ body {
 
   .book-modal__frame {
     max-height: 94vh;
+    max-height: 94dvh;
   }
 
   /* Botão fechar modal com alvo de toque adequado */
@@ -149,6 +222,7 @@ body {
     width: 44px;
     height: 44px;
     font-size: 1.6rem;
+    margin-bottom: calc(-44px - var(--space-2));
   }
 
   /* Links do modal em coluna para não apertar em mobile */
@@ -162,9 +236,25 @@ body {
     justify-content: center;
   }
 
-  /* Currículo com padding reduzido */
-  .resume__book {
+  /* Currículo e contato com padding reduzido */
+  .resume__book,
+  .contact__desk {
     padding: var(--space-4);
+  }
+
+  .resume__download .btn {
+    width: 100%;
+  }
+
+  /* Canais de contato com área de toque maior */
+  .contact__channels a {
+    padding-block: 0.6rem;
+  }
+
+  /* 16px evita o zoom automático do iOS ao focar nos campos */
+  .form-field input,
+  .form-field textarea {
+    font-size: 1rem;
   }
 
   /* Botão de envio do formulário ocupa largura total */
@@ -173,12 +263,23 @@ body {
     justify-content: center;
   }
 
-  /* Scroll suave em iOS para a estante de livros */
-  .bookshelf {
-    -webkit-overflow-scrolling: touch;
-  }
-
   .skill-shelf {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Telas muito estreitas (<= 360px) ---------- */
+@media (max-width: 360px) {
+  .nav__brand {
+    font-size: 1rem;
+  }
+
+  .resume__book,
+  .contact__desk {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .skill-book {
+    padding: var(--space-2);
   }
 }

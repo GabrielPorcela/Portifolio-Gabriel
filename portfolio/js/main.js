@@ -192,17 +192,41 @@
     const menu = document.getElementById("navMenu");
     if (!toggle || !menu) return;
 
-    toggle.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("is-open");
+    function setMenuState(isOpen) {
+      menu.classList.toggle("is-open", isOpen);
       toggle.setAttribute("aria-expanded", String(isOpen));
       toggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+    }
+
+    toggle.addEventListener("click", () => {
+      setMenuState(!menu.classList.contains("is-open"));
     });
 
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", () => setMenuState(false));
+    });
+
+    // Fecha com Esc e ao tocar/clicar fora do menu
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("is-open")) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        menu.classList.contains("is-open") &&
+        !menu.contains(e.target) &&
+        !toggle.contains(e.target)
+      ) {
+        setMenuState(false);
+      }
+    });
+
+    // Ao voltar para o layout desktop, garante que o menu não fique "aberto"
+    window.matchMedia("(min-width: 781px)").addEventListener("change", (e) => {
+      if (e.matches) setMenuState(false);
     });
   }
 
