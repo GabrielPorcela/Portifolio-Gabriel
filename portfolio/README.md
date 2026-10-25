@@ -13,7 +13,7 @@ biblioteca: cada projeto é representado como um livro em uma estante.
 ├── assets/
 │   ├── images/              # Capas de projeto e imagem de Open Graph (SVG placeholder)
 │   ├── icons/                # Favicon (SVG placeholder)
-│   └── documents/            # Coloque aqui o curriculo.pdf
+│   └── documents/            # Coloque aqui o curriculo1.pdf
 ├── css/
 │   ├── style.css              # Tokens de design + todos os componentes
 │   └── responsive.css         # Breakpoints (tablet e mobile)
@@ -75,7 +75,7 @@ na seção `#contato`.
 
 ## Como adicionar o currículo em PDF
 
-Salve o arquivo como `assets/documents/curriculo.pdf`. O botão "Baixar
+Salve o arquivo como `assets/documents/curriculo1.pdf`. O botão "Baixar
 currículo" na seção de currículo já aponta para esse caminho.
 
 ## Como colocar o projeto no GitHub
